@@ -1,7 +1,7 @@
 import './App.css';
-import Home from './pages/home';
-import Conversation from './pages/Conversation';
-import NotExist from './pages/NotExist';
+import Home from './pages/Home/Home';
+import Conversation from './pages/Conversation/Conversation';
+import NotExist from './pages/NotExist/NotExist';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
