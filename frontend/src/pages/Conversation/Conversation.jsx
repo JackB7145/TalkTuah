@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { TopicContext } from '../../context/TopicContext';
 
 const Conversation = () => {
+  const { topic } = useContext(TopicContext);
   return (
-    <div>Conversation</div>
+    <div>Current Topic: {topic}</div>
   )
 }
 
