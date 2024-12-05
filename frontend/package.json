@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.119.0",
+    "@react-three/fiber": "^8.17.10",
     "frontend": "file:../frontend",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
