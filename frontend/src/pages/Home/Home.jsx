@@ -80,21 +80,8 @@ const Home = () => {
   const { topic, setTopic } = useContext(TopicContext);
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
     navigate('/conversation');
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8000/topic', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ topic }),
-      });
-      const data = await response.json();
-      console.log('Server response:', data.message);
-    } catch (e) {
-      console.log('Error:', e);
-    }
   };
 
   return (
