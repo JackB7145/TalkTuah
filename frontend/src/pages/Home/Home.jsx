@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Edges } from '@react-three/drei';
 
+
+
 const MinecraftSteve = () => {
   const ref = useRef();
   useFrame(() => {
@@ -100,6 +102,9 @@ const Home = () => {
           <pointLight position={[0, 0, 0]} />
           <MinecraftSteve />
         </Canvas>
+      </div>
+      <div className='w-4 bg-black'>
+        <p className="text-blue-600 font-mono">Hello</p>
       </div>
     </div>
   );
