@@ -1,24 +1,51 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TopicContext } from '../../context/TopicContext';
-import {useNavigate} from 'react-router-dom';
-import './Conversation.css';
+import Chat from "../../components/chat.jsx";
 
 const Conversation = () => {
   const { topic } = useContext(TopicContext);
-  const navigate = useNavigate();
-  function goHome(){
-    navigate('/');
-  }
+  const [conversation, setConversation] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchTopic = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/topic', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ topic }), 
+        });
+
+        if (isMounted) {
+          const data = await response.json(); 
+          console.log('Server response:', data);
+
+          if (data.discussion) {
+            setConversation(data.discussion); 
+            console.log(conversation)
+          }
+          console.log(conversation)
+        }
+      } catch (error) {
+        if (isMounted) {
+          console.log('Error:', error);
+        }
+      }
+    };
+
+    fetchTopic();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [topic]);  
+
   return (
-    topic ? (
-      <>
-        <div>{topic}</div>
-      </>
-    ) : (
-      <div>Error, please return to home <div className = "link" onClick={() => goHome()}>here</div></div>
-    )
-    
+    <div>Current Topic: {topic}</div>
   )
 }
 
-export default Conversation
+export default Conversation;
