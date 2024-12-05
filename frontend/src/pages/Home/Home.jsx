@@ -5,18 +5,49 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Edges } from '@react-three/drei';
 
 
-
 const MinecraftSteve = () => {
   const ref = useRef();
   useFrame(() => {
     if (ref.current) {
       ref.current.rotation.y += 0.01;
+      ref.current.rotation.z += 0.01;
+      ref.current.rotation.x += 0.01;
     }
   });
 
   return (
     <group ref={ref}>
       {/* Head */}
+      <mesh position={[0,0,2]}>
+        <sphereGeometry args={[0.5]}/>
+        <meshStandardMaterial color="brown" />
+        <Edges color="black" />
+      </mesh>
+      <mesh position={[2,0,0]}>
+        <sphereGeometry args={[0.5]}/>
+        <meshStandardMaterial color="brown" />
+        <Edges color="black" />
+      </mesh>
+      <mesh position={[-2,0,0]}>
+        <sphereGeometry args={[0.5]}/>
+        <meshStandardMaterial color="brown" />
+        <Edges color="black" />
+      </mesh>
+      <mesh position={[1,0,-2]}>
+        <sphereGeometry args={[0.5]}/>
+        <meshStandardMaterial color="brown" />
+        <Edges color="black" />
+      </mesh>
+      <mesh position={[0,2.7,0]}>
+        <boxGeometry args={[1,0.7,1]}/>
+        <meshStandardMaterial color="brown" />
+        <Edges color="black" />
+      </mesh>
+      <mesh position={[0,2.3,0]}>
+        <boxGeometry args={[1.25, 0.1, 1.25]}/>
+        <meshStandardMaterial color="red" />
+        <Edges color="black" />
+      </mesh>
       <mesh position={[0, 1.75, 0]}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#f8b878" />
@@ -87,7 +118,7 @@ const Home = () => {
   };
 
   return (
-    <div className="form">
+    <div className="bg-[red]">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -97,14 +128,14 @@ const Home = () => {
         <button type="submit">Submit</button>
       </form>
       <div style={{ width: '100%', height: '400px', marginTop: '20px' }}>
-        <Canvas>
-          <ambientLight intensity={1} />
-          <pointLight position={[0, 0, 0]} />
+        <Canvas style={{backgroundColor: "black"}}>
+          <ambientLight intensity={1}/>
+          <pointLight position={[0, 0, 3]} />
           <MinecraftSteve />
         </Canvas>
       </div>
-      <div className='w-4 bg-black'>
-        <p className="text-blue-600 font-mono">Hello</p>
+      <div className='w-400 bg-[black]'>
+        <p className="text-[red]">Hello</p>
       </div>
     </div>
   );
