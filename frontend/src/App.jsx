@@ -1,4 +1,4 @@
-import './App.css';
+import './output.css';
 import Home from './pages/Home/Home';
 import Conversation from './pages/Conversation/Conversation';
 import NotExist from './pages/NotExist/NotExist';
