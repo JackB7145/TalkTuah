@@ -17,7 +17,7 @@ def generate_response(model, tokenizer, prompt, max_tokens=100, temperature=0.9)
 
 
 def simulateDebate(topic):
-    model_name = "google/flan-t5-xl"
+    model_name = "google/flan-t5-large"
 
     # Initialize tokenizers and models for both sides of the debate
     tokenizer_1 = AutoTokenizer.from_pretrained(model_name)
