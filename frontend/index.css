@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* src/index.css or App.css */
+html, body {
+    height: 100%;
+}
+
+/* Customize the scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 3px; /* Width of the scrollbar */
+    height: 3px; /* Height of the scrollbar (for horizontal scrollbars) */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #db810b; /* Background of the scrollbar track */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #492900; /* Scrollbar thumb (the draggable part) */
+    border-radius: 1px; /* Rounded corners */
+    transition: 0.5s;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: black; /* Scrollbar thumb when hovered */
+    transition: 0.5s;
+  }
+  
