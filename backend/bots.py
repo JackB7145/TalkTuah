@@ -1,5 +1,5 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-
+from rag import get_relevant_info
 
 def generate_response(model, tokenizer, prompt, max_tokens=100, temperature=1):
     inputs = tokenizer(prompt, return_tensors='pt').to(model.device)
@@ -22,6 +22,8 @@ def simulateDebate(topic):
     tokenizer_2 = AutoTokenizer.from_pretrained(model_name)
     model_2 = AutoModelForSeq2SeqLM.from_pretrained(model_name).to("cpu")
 
+    relevant_data = get_relevant_info(topic)
+    print(relevant_data)
     # Define a more focused and clear opening prompt
     initial_prompt = f'''
     You are a debate bot discussing the topic: "{topic}". 
@@ -33,6 +35,7 @@ def simulateDebate(topic):
     3. **Conclusion**: Wrap up your argument confidently by reinforcing your position on "{topic}" and making a final, persuasive statement.
 
     Start with your opening statement on "{topic}".
+    Here is some relative data on the topic: ${relevant_data}
     '''
     opening_statement = generate_response(model_1, tokenizer_1, initial_prompt)
     conversation_history_bot1 = [opening_statement]
@@ -55,6 +58,7 @@ def simulateDebate(topic):
             You have a strong understanding of the subject matter. The conversation so far is:
             {curr_conv}
             Please provide a clear and logical rebuttal, focusing on countering Bot 1's arguments directly.
+            Here is some relative data on the topic: ${relevant_data}
             """
             res = generate_response(model_2, tokenizer_2, prompt)
             conversation_history_bot2.append(res)
@@ -66,6 +70,7 @@ def simulateDebate(topic):
             You have a strong understanding of the subject matter. The conversation so far is:
             {curr_conv}
             Please provide a strong rebuttal, pointing out why Bot 2's counterarguments are not valid or convincing.
+            Here is some relative data on the topic: ${relevant_data}
             """
             res = generate_response(model_1, tokenizer_1, prompt)
             conversation_history_bot1.append(res)
