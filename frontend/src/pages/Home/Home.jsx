@@ -124,7 +124,12 @@ const Home = () => {
 
   return (
     <div className="w-full min-h-screen bg-yellow-100 flex flex-col justify-center items-center">
-      <div className='flex flex-col justify-end items-center bg-yellow-700 border-[1rem] border-yellow-950 rounded-2xl min-h-[45rem] min-w-[35rem]'>
+      <div className='flex flex-col justify-end items-center bg-yellow-700 border-[1rem] border-yellow-950 rounded-2xl min-h-[45rem] max-h-[45rem] min-w-[35rem] max-w-[35rem] shadow-2xl'>
+        
+      <div className='w-[80%] min-h-[38rem] flex justify-center items-center font-medium text-amber-200 text-3xl'>
+        <p>This Application showcases the abbilities for AI to debate each other in any topic, additionally "HawkTuah Spit on that thang" - Magad Yousef</p>
+      </div>
+        
         <div className='flex flex-col w-full justify-center items-center bg-yellow-800 p-4'>
           <form onSubmit={handleSubmit}>
             <input className='w-auto border-[0.25rem] bg-amber-900 border-yellow-950 rounded-lg mr-2 pl-2 font-medium text-amber-200 placeholder-amber-200'
@@ -133,7 +138,6 @@ const Home = () => {
               placeholder='Topic Here'
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              onBlur={() => {}}
             />
             <button type="submit" className="text-amber-200 border-[0.2rem] border-amber-950 bg-amber-950 pl-2 pr-2 rounded-lg font-medium">Submit</button>
           </form>

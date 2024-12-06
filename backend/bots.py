@@ -15,7 +15,7 @@ def generate_response(model, tokenizer, prompt, max_tokens=100, temperature=1):
 
 
 def simulateDebate(topic):
-    model_name = "google/flan-t5-xl"  # Using the large model for higher accuracy
+    model_name = "google/flan-t5-large"  # Using the large model for higher accuracy
     tokenizer_1 = AutoTokenizer.from_pretrained(model_name)
     model_1 = AutoModelForSeq2SeqLM.from_pretrained(model_name).to("cpu")
 
