@@ -127,7 +127,7 @@ const Home = () => {
       <div className='flex flex-col justify-end items-center bg-yellow-700 border-[1rem] border-yellow-950 rounded-2xl min-h-[45rem] max-h-[45rem] min-w-[35rem] max-w-[35rem] shadow-2xl'>
         
       <div className='w-[80%] min-h-[38rem] flex justify-center items-center font-medium text-amber-200 text-3xl'>
-        <p>This Application showcases the abbilities for AI to debate each other in any topic, additionally "HawkTuah Spit on that thang" - Magad Yousef</p>
+        <p>This Application showcases the abbilities for AI to debate each other in any topic, please enter a topic in the form of a statement such as "cats are better than dogs" rather than "cats versus dogs"</p>
       </div>
         
         <div className='flex flex-col w-full justify-center items-center bg-yellow-800 p-4'>
