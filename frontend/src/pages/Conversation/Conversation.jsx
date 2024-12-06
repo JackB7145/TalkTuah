@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import React, { useState, useEffect, useContext } from 'react';
 import { TopicContext } from '../../context/TopicContext';
 import Chat from '../../components/chat.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -15,12 +14,6 @@ const makeCall = async (topic, setConversation, setLoading) => {
       body: JSON.stringify({ topic }),
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("API response:", data);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
