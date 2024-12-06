@@ -4,9 +4,7 @@ import App from './App.jsx';
 import { TopicProvider } from './context/TopicContext.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <TopicProvider> 
       <App />
     </TopicProvider>
-  </StrictMode>
 );

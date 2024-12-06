@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from bots import simulateDebate
 
 app = FastAPI()
 
@@ -26,7 +27,8 @@ class TopicRequest(BaseModel):
 @app.post("/topic")
 async def read_request_body(request: Request):
     try:
-  
+        
+        
         body = await request.json()  
         print(f"Received JSON body: {body}")
 
@@ -34,12 +36,10 @@ async def read_request_body(request: Request):
         if not topic:
             return {"error": "No 'topic' field in the request body"}
 
+        output = simulateDebate(topic)
+        print(output)
         return {
-            "discussion": [
-                {"name": "Jerry", "topic": topic},
-                {"name": "Barry", "topic": topic},
-                {"name": "Tom", "topic": topic},
-            ]
+            "discussion": output
         }
 
     except Exception as e:
