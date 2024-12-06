@@ -15,7 +15,7 @@ def generate_response(model, tokenizer, prompt, max_tokens=100, temperature=0.9)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 def simulateDebate(topic):
-    model_name = "tiiuae/falcon-7b-instruct"
+    model_name = "google/flan-t5-xl"
     tokenizer_1 = AutoTokenizer.from_pretrained(model_name)
     model_1 = AutoModelForCausalLM.from_pretrained(model_name).to("cpu")
 
@@ -38,7 +38,48 @@ def simulateDebate(topic):
     Please begin with your opening statement on "${topic}".
     '''
     opening_statement = generate_response(model_1, tokenizer_1, initial_prompt)
-    print(opening_statement)
-    return
+    print("Bot 1: " + opening_statement)
+    conversation_history_bot1 = []
+    conversation_history_bot2 = []
+    conversation_history_bot1[0] = opening_statement
+
+    flag = True
+    for i in range(5):
+        curr_conv = ""
+        for j in range(max(len(conversation_history_bot1), len(conversation_history_bot2))):
+            if(conversation_history_bot1):
+                curr_conv += "Bot 1: " + conversation_history_bot1[j]
+            if(conversation_history_bot2):
+                curr_conv += "Bot 2: " + conversation_history_bot2[j]
+        if(flag):
+            prompt = """You are a bot that is against ${topic}. Your name is Bot 2. Here is the current conversation: ${curr_conv}.
+            Please provide me with a rebuttal
+            """
+            res = generate_response(model_2, tokenizer_2, prompt)
+            conversation_history_bot2.append(res)
+
+        else:
+            prompt = """You are a bot that is pro ${topic}. Your name is Bot 1. Here is the current conversation: ${curr_conv}.
+            Please provide me with a rebuttal
+            """
+            res = generate_response(model_1, tokenizer_1, prompt)
+            conversation_history_bot2.append(res)
+    curr_conv = ""
+    for j in range(max(len(conversation_history_bot1), len(conversation_history_bot2))):
+            if(conversation_history_bot1):
+                curr_conv += "Bot 1: " + conversation_history_bot1[i]
+            if(conversation_history_bot2):
+                curr_conv += "Bot 2: " + conversation_history_bot2[i]
+    prompt_bot_2 = "You are a bot that is against ${topic}. Your name is Bot 2. Here is the current conversation: ${curr_conv}. Please make a concluding statement on this debate"
+    conversation_history_bot2.append(generate_response(model_2, tokenizer_2, prompt_bot_2))
+    prompt_bot_1 = "You are a bot that is pro ${topic}. Your name is Bot 1. Here is the current conversation: ${curr_conv}. Please make a concluding statement on this debate"
+    conversation_history_bot1.append(generate_response(model_1, tokenizer_1, prompt_bot_1))
+    conv = []
+    for i in range(len(conversation_history_bot1)):
+        conv.append(conversation_history_bot1[i])
+        conv.append(conversation_history_bot2[i])
+
+    print(conv)
+    return conv
 
 simulateDebate("Abortion")
