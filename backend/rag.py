@@ -64,7 +64,7 @@ def get_relevant_info(query):
     
     texts = concatenate_text_from_files('./links')
     
-    relevant_chunks = find_relevant_chunks(query, texts, 3)
+    relevant_chunks = find_relevant_chunks(query, texts, 1)
+    relevant_chunk = (relevant_chunks[0])[1000:1800]
     
-    return relevant_chunks
-
+    return relevant_chunk

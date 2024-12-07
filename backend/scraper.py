@@ -55,7 +55,15 @@ def fetch_and_scrape_links(query, api_key=SERPER_API_KEY, directory="./links", n
                 response = requests.get(link, timeout=10)
                 response.raise_for_status()
                 soup = BeautifulSoup(response.content, "html.parser")
-                text = soup.get_text(separator="\n").strip()
+
+                # Get the text without excessive newlines
+                text = soup.get_text(separator=" ").strip()  # Replace newlines with spaces
+
+                # Optional: Remove any extra newlines if present at the beginning or end
+                text = text.replace("\n", " ")  # Replace all \n with a space
+
+                # Optionally, remove excessive spaces
+                text = " ".join(text.split())  # Convert multiple spaces into one space
 
                 # Save to a text file
                 file_path = os.path.join(directory, f"result_{i}.txt")

@@ -15,14 +15,14 @@ def generate_response(model, tokenizer, prompt, max_tokens=100, temperature=1):
 
 
 def simulateDebate(topic):
-    model_name = "google/flan-t5-large"  # Using the large model for higher accuracy
+    model_name = "google/flan-t5-xl"  # Using the large model for higher accuracy
     tokenizer_1 = AutoTokenizer.from_pretrained(model_name)
     model_1 = AutoModelForSeq2SeqLM.from_pretrained(model_name).to("cpu")
 
     tokenizer_2 = AutoTokenizer.from_pretrained(model_name)
     model_2 = AutoModelForSeq2SeqLM.from_pretrained(model_name).to("cpu")
 
-    relevant_data = get_relevant_info(topic)
+    relevant_data = get_relevant_info("Facts about" + str(topic))
     print(relevant_data)
     # Define a more focused and clear opening prompt
     initial_prompt = f'''
@@ -35,7 +35,7 @@ def simulateDebate(topic):
     3. **Conclusion**: Wrap up your argument confidently by reinforcing your position on "{topic}" and making a final, persuasive statement.
 
     Start with your opening statement on "{topic}".
-    Here is some relative data on the topic: ${relevant_data}
+    Use this information ${relevant_data}
     '''
     opening_statement = generate_response(model_1, tokenizer_1, initial_prompt)
     conversation_history_bot1 = [opening_statement]
@@ -58,7 +58,7 @@ def simulateDebate(topic):
             You have a strong understanding of the subject matter. The conversation so far is:
             {curr_conv}
             Please provide a clear and logical rebuttal, focusing on countering Bot 1's arguments directly.
-            Here is some relative data on the topic: ${relevant_data}
+            Here is some information on the topic. Use any information you can from the following data to support your claim ${relevant_data}
             """
             res = generate_response(model_2, tokenizer_2, prompt)
             conversation_history_bot2.append(res)
@@ -70,8 +70,7 @@ def simulateDebate(topic):
             You have a strong understanding of the subject matter. The conversation so far is:
             {curr_conv}
             Please provide a strong rebuttal, pointing out why Bot 2's counterarguments are not valid or convincing.
-            Here is some relative data on the topic: ${relevant_data}
-            """
+            Here is some information on the topic. Use any information you can from the following data to support your claim ${relevant_data}            """
             res = generate_response(model_1, tokenizer_1, prompt)
             conversation_history_bot1.append(res)
 
