@@ -8,7 +8,7 @@ Steps to run and deploy:
 6. In the frontend directory run the command "npm run dev" - This will Deploy the client side's frontend web page
 
 Description:
-This Web Application leverages a React.js, FastAPI backend (Hosted with uvicorn), the google flan extra large model, RAG methodlogy, and cosine similarity to simulate a disccusion between 2 bots about a entered topic. See below!
+This Web Application leverages React.js, FastAPI backend (Hosted with uvicorn), the google flan extra large model, RAG methodlogy, and cosine similarity to simulate a disccusion between 2 bots about a entered topic. See below!
 
 ![alt text](image.png)
 ![alt text](image-1.png)
