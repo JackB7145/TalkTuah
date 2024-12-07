@@ -1,3 +1,5 @@
+For best experience, run on Microsoft Edge (webkits)
+
 Steps to run and deploy:
 
 1. Open the "frontend" directory and run the command "npm install" in the CLI
