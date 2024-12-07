@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from rag import get_relevant_info
 
+
 def generate_response(model, tokenizer, prompt, max_tokens=100, temperature=1):
     inputs = tokenizer(prompt, return_tensors='pt').to(model.device)
     outputs = model.generate(
